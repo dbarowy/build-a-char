@@ -1,6 +1,23 @@
-﻿// open CS334
+﻿open Parser
+open Evaluator
+open System.IO
 
-let repl() : unit =
+let rec repl() : unit =
+    let input = System.Console.ReadLine()
+    if input = "quit" then
+        printfn "Goodbye!"
+        exit 0
+    else
+        let asto = parse input
+        match asto with
+        | Some ast -> 
+            let animalOne = evalAnimal ast
+            printfn "%A" animalOne
+        | None -> printf "Make sure your input is of the form <emotion> <animal> wearing <outfit> <shoes> and <accessory>\n"
+    repl()
+
+[<EntryPoint>]
+let main args =
     printf "-----------------------------------------------------------------------------------------------------------------\n" 
     printf "-----------------------------------------------------------------------------------------------------------------\n" 
     printf " \n Hello! Welcome to Jess and Will's character generator! :D \n
@@ -28,18 +45,5 @@ let repl() : unit =
     printf "-----------------------------------------------------------------------------------------------------------------\n"
     printf "-----------------------------------------------------------------------------------------------------------------\n" 
     printf "Please enter a prompt!\n"
-    // let input = System.Console.ReadLine()
-    // if input = "quit" then
-    //     printfn "Goodbye!"
-    //     exit 0
-    // else
-    //     let asto = parse input
-    //     match asto with
-    //     | Some ast -> printfn "%A" ast
-    //     | None -> printf "Make sure your input is of the form "<emotion> <animal> wearing <outfit> <shoes> and <accessory>" // this might be wrong
-    //repl()
-
-[<EntryPoint>]
-let main args =
     repl()
     0

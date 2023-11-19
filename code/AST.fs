@@ -18,7 +18,7 @@ type AnimalNoColor =
 | Frog
 | Bear
 
-type Animal = Color * AnimalNoColor
+type Animal = { color: Color; animal: AnimalNoColor }
 
 type Emotion =
 | Happy
@@ -34,7 +34,7 @@ type TopNoColor =
 | Suit
 | Dress
 
-type Top = Color * TopNoColor
+type Top = { color: Color; top: TopNoColor }
 
 type BottomNoColor =
 | Pants
@@ -42,9 +42,9 @@ type BottomNoColor =
 | Skirt
 | Unit
 
-type Bottom = Color * BottomNoColor
+type Bottom = { color: Color; bottom: BottomNoColor }
 
-type Outfit = Top * Bottom
+type Outfit = { outfitTop: Top; outfitBottom: Bottom }
 
 type ShoesNoColor =
 | Sneakers
@@ -53,7 +53,7 @@ type ShoesNoColor =
 | Heels
 | Slippers
 
-type Shoes = Color * ShoesNoColor
+type Shoes = { color: Color; shoes: ShoesNoColor }
 
 type AccessoryNoColor =
 | Flower
@@ -63,6 +63,6 @@ type AccessoryNoColor =
 | Scarf
 | Gloves
 
-type Accessory = Color * AccessoryNoColor
+type Accessory = { color: Color; accessory: AccessoryNoColor }
 
 type Expr = Emotion * Animal * Outfit * Shoes * Accessory

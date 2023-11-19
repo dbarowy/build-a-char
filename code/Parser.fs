@@ -2,6 +2,7 @@ module Parser
 
 open Combinator
 open AST
+open System
 
 let pcolor =
     (pstr "red" |>> (fun _ -> Red)) <|>
@@ -47,19 +48,27 @@ let panimal =
     pseq
         (pleft pcolor pws1)
         (panimalnocolor)
-        (fun(x,y) -> Animal(x,y))
+        (fun(x,y) -> { color = x; animal = y})
 
 let pshoes =
     pseq
         (pleft pcolor pws1)
         (pshoesnocolor)
-        (fun(x,y) -> Shoes(x,y))
+        (fun(x,y) -> { color = x; shoes = y })
 
 let paccessory =
     pseq
         (pleft pcolor pws1)
         (paccessorynocolor)
-        (fun(x,y) -> Accessory(x,y))
+        (fun(x,y) -> { color = x; accessory = y})
+
+let grammar = pleft panimal peof
+
+let parse (input: string) : Animal option =
+    let i = prepare input
+    match grammar i with
+    | Success(ast, _) -> Some ast
+    | Failure(_,_) -> None
 
 //let poutfit =
 
