@@ -10,7 +10,7 @@ type Color =
 | Pink
 | Black
 | White
-| Grey
+| Brown
 
 type AnimalNoColor =
 | Bunny

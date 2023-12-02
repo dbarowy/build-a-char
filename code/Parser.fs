@@ -14,7 +14,7 @@ let pcolor =
     (pstr "pink" |>> (fun _ -> Pink)) <|>
     (pstr "black" |>> (fun _ -> Black)) <|>
     (pstr "white" |>> (fun _ -> White)) <|>
-    (pstr "grey" |>> (fun _ -> Grey))
+    (pstr "brown" |>> (fun _ -> Brown))
 
 let pemotion =
     (pstr "happy" |>> (fun _ -> Happy)) <|>

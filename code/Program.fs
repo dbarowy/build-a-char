@@ -1,4 +1,4 @@
-﻿open Parser
+open Parser
 open Evaluator
 open System.IO
 
@@ -34,7 +34,7 @@ let main args =
     <bottom>: <color> pants, shorts, or skirt\n
     <shoes>: <color> sneakers, cowboy boots, combat boots, heels, or slippers \n
     <accessory>: <color> flower, star, glasses, sunglasses, scarf, or gloves\n
-    <color>: red, orange, yellow, green, blue, purple, pink, white, black, or grey\n
+    <color>: red, orange, yellow, green, blue, purple, pink, white, black, or brown\n
     -------------------------------------------------------------------------------------------\n
     Here are some example prompts:\n
     happy white bunny wearing green shirt and blue pants yellow sneakers and pink flower\n 
