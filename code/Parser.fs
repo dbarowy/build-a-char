@@ -44,11 +44,25 @@ let panimalnocolor =
     (pstr "frog" |>> (fun _ -> Frog)) <|>
     (pstr "bear" |>> (fun _ -> Bear))
 
+let ptopnocolor =
+    (pstr "shirt" |>> (fun _ -> Shirt)) <|>
+    (pstr "sweater" |>> (fun _ -> Sweater)) <|>
+    (pstr "hoodie" |>> (fun _ -> Hoodie)) <|>
+    (pstr "suit" |>> (fun _ -> Suit)) <|>
+    (pstr "dress" |>> (fun _ -> Dress))
+
+let pbottomnocolor =
+    (pstr "pants" |>> (fun _ -> Pants)) <|>
+    (pstr "shorts" |>> (fun _ -> Shorts)) <|>
+    (pstr "skirt" |>> (fun _ -> Skirt)) <|>
+    (pstr "blank" |>> (fun _ -> Blank))
+
+
 let panimal =
     pseq
         (pleft pcolor pws1)
         (panimalnocolor)
-        (fun(x,y) -> { color = x; animal = y})
+        (fun(x,y) -> { color = x; animal = y })
 
 let pshoes =
     pseq
@@ -60,28 +74,48 @@ let paccessory =
     pseq
         (pleft pcolor pws1)
         (paccessorynocolor)
-        (fun(x,y) -> { color = x; accessory = y})
+        (fun(x,y) -> { color = x; accessory = y })
 
-let grammar = pleft panimal peof
+let ptop =
+    pseq
+        (pleft pcolor pws1)
+        (ptopnocolor)
+        (fun(x,y) -> { color = x; top = y })
 
-let parse (input: string) : Animal option =
+let pbottom =
+    pseq
+        (pleft pcolor pws1)
+        (pbottomnocolor)
+        (fun(x,y) -> { color = x; bottom = y })
+
+let pexpr =
+    pseq
+        (pseq
+            (pseq
+                (pseq
+                    (pseq
+                        (pemotion)
+                        (panimal)
+                        (fun((x, y)) -> { emotion = x; animal = y; top = {color = Black; top = Shirt};
+                            bottom = {color = Black; bottom = Blank}; shoes = {color = Black; shoes = Sneakers};
+                            accessory = {color = Black; accessory = Scarf} })
+                    )
+                    (ptop)
+                    (fun(x, y) -> { x with top = y })
+                )
+                (pbottom)
+                (fun(x, y) -> { x with bottom = y })
+            )
+            (pshoes)
+            (fun(x, y) -> { x with shoes = y })
+        )
+        (paccessory)
+        (fun(x, y) -> { x with accessory = y })
+
+let grammar = pleft pexpr peof
+
+let parse (input: string) : Expr option =
     let i = prepare input
     match grammar i with
     | Success(ast, _) -> Some ast
     | Failure(_,_) -> None
-
-//let poutfit =
-
-//let ptop =
-
-//let pbottom =
-
-//let pexpr =
-//    pseq
-//        (pseq
-//            (pseq
-//                (pseq
-//
-//                )
-//            )
-//        )

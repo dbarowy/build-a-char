@@ -9,10 +9,20 @@ let rec repl() : unit =
         exit 0
     else
         let asto = parse input
+        printfn "%A" asto
         match asto with
         | Some ast -> 
-            let animalOne = evalAnimal ast
-            printfn "%A" animalOne
+            let animalOne = load (evalAnimal ast.animal)
+            let emotionOne = load (evalEmotion ast.emotion)
+            let withEmotion = compositeImages animalOne emotionOne
+            let shoesOne = load (evalShoes ast.shoes)
+            let withShoes = compositeImages withEmotion shoesOne
+            let topOne = load (evalTop ast.top)
+            let withTop = compositeImages withShoes topOne
+            let bottomOne = load (evalBottom ast.bottom)
+            let withBottom = compositeImages withTop bottomOne
+            let accessoryOne = load (evalAccessory ast.accessory)
+            (compositeImages withBottom accessoryOne) |> save "Character.PNG"
         | None -> printf "Make sure your input is of the form <emotion> <animal> wearing <outfit> <shoes> and <accessory>\n"
     repl()
 

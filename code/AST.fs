@@ -40,11 +40,9 @@ type BottomNoColor =
 | Pants
 | Shorts
 | Skirt
-| Unit
+| Blank
 
 type Bottom = { color: Color; bottom: BottomNoColor }
-
-type Outfit = { outfitTop: Top; outfitBottom: Bottom }
 
 type ShoesNoColor =
 | Sneakers
@@ -65,4 +63,4 @@ type AccessoryNoColor =
 
 type Accessory = { color: Color; accessory: AccessoryNoColor }
 
-type Expr = Emotion * Animal * Outfit * Shoes * Accessory
+type Expr = { emotion: Emotion; animal: Animal; top: Top; bottom: Bottom; shoes: Shoes; accessory: Accessory }
