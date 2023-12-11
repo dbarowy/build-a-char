@@ -28,7 +28,7 @@ type Emotion =
 | Tired
 
 type TopNoColor =
-| Shirt
+| Tshirt
 | Sweater
 | Hoodie
 | Suit

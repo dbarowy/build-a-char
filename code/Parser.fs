@@ -45,7 +45,7 @@ let panimalnocolor =
     (pstr "bear" |>> (fun _ -> Bear))
 
 let ptopnocolor =
-    (pstr "shirt" |>> (fun _ -> Shirt)) <|>
+    (pstr "tshirt" |>> (fun _ -> Tshirt)) <|>
     (pstr "sweater" |>> (fun _ -> Sweater)) <|>
     (pstr "hoodie" |>> (fun _ -> Hoodie)) <|>
     (pstr "suit" |>> (fun _ -> Suit)) <|>
@@ -94,19 +94,19 @@ let pexpr =
             (pseq
                 (pseq
                     (pseq
-                        (pemotion)
-                        (panimal)
-                        (fun((x, y)) -> { emotion = x; animal = y; top = {color = Black; top = Shirt};
+                        (pleft pemotion pws1)
+                        (pleft panimal pws1)
+                        (fun((x, y)) -> { emotion = x; animal = y; top = {color = Black; top = Tshirt};
                             bottom = {color = Black; bottom = Blank}; shoes = {color = Black; shoes = Sneakers};
                             accessory = {color = Black; accessory = Scarf} })
                     )
-                    (ptop)
+                    (pleft ptop pws1)
                     (fun(x, y) -> { x with top = y })
                 )
-                (pbottom)
+                (pleft pbottom pws1)
                 (fun(x, y) -> { x with bottom = y })
             )
-            (pshoes)
+            (pleft pshoes pws1)
             (fun(x, y) -> { x with shoes = y })
         )
         (paccessory)

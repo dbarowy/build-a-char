@@ -9,7 +9,6 @@ let rec repl() : unit =
         exit 0
     else
         let asto = parse input
-        printfn "%A" asto
         match asto with
         | Some ast -> 
             let animalOne = load (evalAnimal ast.animal)
