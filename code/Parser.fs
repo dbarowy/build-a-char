@@ -25,10 +25,11 @@ let pemotion =
 
 let pshoesnocolor =
     (pstr "sneakers" |>> (fun _ -> Sneakers)) <|>
-    (pstr "cowboy boots" |>> (fun _ -> CowboyBoots)) <|>
-    (pstr "combat boots" |>> (fun _ -> CombatBoots)) <|>
+    (pstr "cowboy boots" |>> (fun _ -> Cowboy_Boots)) <|>
+    (pstr "combat boots" |>> (fun _ -> Combat_Boots)) <|>
     (pstr "heels" |>> (fun _ -> Heels)) <|>
-    (pstr "slippers" |>> (fun _ -> Slippers))
+    (pstr "slippers" |>> (fun _ -> Slippers)) <|>
+    (pstr "blank" |>> (fun _ -> ShoesBlank))
 
 let paccessorynocolor =
     (pstr "flower" |>> (fun _ -> Flower)) <|>
@@ -36,7 +37,8 @@ let paccessorynocolor =
     (pstr "glasses" |>> (fun _ -> Glasses)) <|>
     (pstr "sunglasses" |>> (fun _ -> Sunglasses)) <|>
     (pstr "scarf" |>> (fun _ -> Scarf)) <|>
-    (pstr "gloves" |>> (fun _ -> Gloves))
+    (pstr "gloves" |>> (fun _ -> Gloves)) <|>
+    (pstr "blank" |>> (fun _ -> AccessoryBlank))
 
 let panimalnocolor =
     (pstr "bunny" |>> (fun _ -> Bunny)) <|>
@@ -49,13 +51,14 @@ let ptopnocolor =
     (pstr "sweater" |>> (fun _ -> Sweater)) <|>
     (pstr "hoodie" |>> (fun _ -> Hoodie)) <|>
     (pstr "suit" |>> (fun _ -> Suit)) <|>
-    (pstr "dress" |>> (fun _ -> Dress))
+    (pstr "dress" |>> (fun _ -> Dress)) <|>
+    (pstr "blank" |>> (fun _ -> TopBlank))
 
 let pbottomnocolor =
     (pstr "pants" |>> (fun _ -> Pants)) <|>
     (pstr "shorts" |>> (fun _ -> Shorts)) <|>
     (pstr "skirt" |>> (fun _ -> Skirt)) <|>
-    (pstr "blank" |>> (fun _ -> Blank))
+    (pstr "blank" |>> (fun _ -> BottomBlank))
 
 
 let panimal =
@@ -97,7 +100,7 @@ let pexpr =
                         (pleft pemotion pws1)
                         (pleft panimal pws1)
                         (fun((x, y)) -> { emotion = x; animal = y; top = {color = Black; top = Tshirt};
-                            bottom = {color = Black; bottom = Blank}; shoes = {color = Black; shoes = Sneakers};
+                            bottom = {color = Black; bottom = BottomBlank}; shoes = {color = Black; shoes = Sneakers};
                             accessory = {color = Black; accessory = Scarf} })
                     )
                     (pleft ptop pws1)

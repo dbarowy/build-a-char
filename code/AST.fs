@@ -33,6 +33,7 @@ type TopNoColor =
 | Hoodie
 | Suit
 | Dress
+| TopBlank
 
 type Top = { color: Color; top: TopNoColor }
 
@@ -40,16 +41,17 @@ type BottomNoColor =
 | Pants
 | Shorts
 | Skirt
-| Blank
+| BottomBlank
 
 type Bottom = { color: Color; bottom: BottomNoColor }
 
 type ShoesNoColor =
 | Sneakers
-| CowboyBoots
-| CombatBoots
+| Cowboy_Boots
+| Combat_Boots
 | Heels
 | Slippers
+| ShoesBlank
 
 type Shoes = { color: Color; shoes: ShoesNoColor }
 
@@ -60,6 +62,7 @@ type AccessoryNoColor =
 | Sunglasses
 | Scarf
 | Gloves
+| AccessoryBlank
 
 type Accessory = { color: Color; accessory: AccessoryNoColor }
 

@@ -18,22 +18,28 @@ let compositeImages(img1: Image)(img2: Image): Image =
     result
 
 
-let evalEmotion(a: Emotion): string =
-    "drawings/" + (a |> string) + ".PNG"
+let evalEmotion(e: Emotion): string =
+    "drawings/" + (e |> string) + ".PNG"
 
 let evalAnimal(a: Animal): string =
     "drawings/" + (a.color |> string) + "_" + (a.animal |> string) + ".PNG"
 
-let evalShoes(a: Shoes): string =
-    "drawings/" + (a.color |> string) + "_" + (a.shoes |> string) + ".PNG"
+let evalShoes(s: Shoes): string =
+    match s.shoes with
+    | ShoesBlank -> "drawings/Blank.PNG"
+    | _ -> "drawings/" + (s.color |> string) + "_" + (s.shoes |> string) + ".PNG"
 
 let evalAccessory(a: Accessory): string =
-    "drawings/" + (a.color |> string) + "_" + (a.accessory |> string) + ".PNG"
+    match a.accessory with
+    | AccessoryBlank -> "drawings/Blank.PNG"
+    | _ -> "drawings/" + (a.color |> string) + "_" + (a.accessory |> string) + ".PNG"
 
 let evalTop(t: Top): string =
-    "drawings/" + (t.color |> string) + "_" + (t.top |> string) + ".PNG"
+    match t.top with
+    | TopBlank -> "drawings/Blank.PNG"
+    | _ -> "drawings/" + (t.color |> string) + "_" + (t.top |> string) + ".PNG"
 
 let evalBottom(b: Bottom): string =
     match b.bottom with
-    | Blank -> "Blank.PNG"
+    | BottomBlank -> "drawings/Blank.PNG"
     | _ -> "drawings/" + (b.color |> string) + "_" + (b.bottom |> string) + ".PNG"

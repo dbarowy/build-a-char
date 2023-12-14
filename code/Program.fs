@@ -32,25 +32,24 @@ let main args =
     printf " \n Hello! Welcome to Jess and Will's character generator! :D \n
     -------------------------------------------------------------------------------------------\n
     This character generator will accept prompts that look like this: \n
-    <emotion> <animal> wearing <outfit> <shoes> and <accessory> \n
+    <emotion> <animal> <top> <bottom> <shoes> <accessory> \n
     and it will return a PNG of a custom character fitting that description!\n
     -------------------------------------------------------------------------------------------\n
     Here are the available options for each category:\n
     <emotion>: happy, neutral, sad, mad, or tired\n
-    <animal>: <color> bunny, cat, frog, or bear\n
-    <outfit>: <color> <top> and <bottom> OR <color> suit OR <color> dress\n
-    <top>: <color> shirt, sweater, or hoodie\n
-    <bottom>: <color> pants, shorts, or skirt\n
-    <shoes>: <color> sneakers, cowboy boots, combat boots, heels, or slippers \n
-    <accessory>: <color> flower, star, glasses, sunglasses, scarf, or gloves\n
+    <animal>: <color> bunny, cat, dog, or bear\n
+    <top>: <color> tshirt, sweater, hoodie, or blank\n
+    <bottom>: <color> pants, shorts, skirt, or blank\n
+    <shoes>: <color> sneakers, cowboy boots, combat boots, heels, slippers, or blank \n
+    <accessory>: <color> flower, star, glasses, sunglasses, scarf, gloves, or blank\n
     <color>: red, orange, yellow, green, blue, purple, pink, white, black, or brown\n
     -------------------------------------------------------------------------------------------\n
     Here are some example prompts:\n
-    happy white bunny wearing green shirt and blue pants yellow sneakers and pink flower\n 
+    happy white bunny green tshirt blue pants yellow sneakers pink flower\n 
     
-    neutral orange cat wearing purple dress blue cowboy boots and yellow star\n
+    neutral orange cat purple dress green blank blue cowboy boots yellow star\n
 
-    tired green frog wearing red sweater orange shorts piink slippers and blue sunglasses\n \n"
+    tired green dog red sweater orange shorts pink slippers blue sunglasses\n \n"
     printf "-----------------------------------------------------------------------------------------------------------------\n"
     printf "-----------------------------------------------------------------------------------------------------------------\n" 
     printf "Please enter a prompt!\n"
