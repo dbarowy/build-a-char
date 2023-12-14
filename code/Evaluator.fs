@@ -14,7 +14,7 @@ let save(path: string)(image: Image) : unit =
 let compositeImages(img1: Image)(img2: Image): Image =
     let result = img1.Clone(fun x -> x |> ignore)
     result.Mutate(fun x -> x.DrawImage(img2, new GraphicsOptions
-    (AlphaCompositionMode = PixelAlphaCompositionMode.SrcIn)) |> ignore)
+    (AlphaCompositionMode = PixelAlphaCompositionMode.SrcOver)) |> ignore)
     result
 
 

@@ -14,14 +14,14 @@ let rec repl() : unit =
             let animalOne = load (evalAnimal ast.animal)
             let emotionOne = load (evalEmotion ast.emotion)
             let withEmotion = compositeImages animalOne emotionOne
+            let bottomOne = load (evalBottom ast.bottom)
+            let withBottom = compositeImages withEmotion bottomOne
             let shoesOne = load (evalShoes ast.shoes)
-            let withShoes = compositeImages withEmotion shoesOne
+            let withShoes = compositeImages withBottom shoesOne
             let topOne = load (evalTop ast.top)
             let withTop = compositeImages withShoes topOne
-            let bottomOne = load (evalBottom ast.bottom)
-            let withBottom = compositeImages withTop bottomOne
             let accessoryOne = load (evalAccessory ast.accessory)
-            (compositeImages withBottom accessoryOne) |> save "Character.PNG"
+            (compositeImages withTop accessoryOne) |> save "Character.PNG"
         | None -> printf "Make sure your input is of the form <emotion> <animal> wearing <outfit> <shoes> and <accessory>\n"
     repl()
 
