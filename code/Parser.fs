@@ -43,7 +43,7 @@ let paccessorynocolor =
 let panimalnocolor =
     (pstr "bunny" |>> (fun _ -> Bunny)) <|>
     (pstr "cat" |>> (fun _ -> Cat)) <|>
-    (pstr "frog" |>> (fun _ -> Frog)) <|>
+    (pstr "dog" |>> (fun _ -> Dog)) <|>
     (pstr "bear" |>> (fun _ -> Bear))
 
 let ptopnocolor =
@@ -112,7 +112,7 @@ let pexpr =
             (pleft pshoes pws1)
             (fun(x, y) -> { x with shoes = y })
         )
-        (paccessory)
+        (pleft paccessory pws0)
         (fun(x, y) -> { x with accessory = y })
 
 let grammar = pleft pexpr peof

@@ -15,7 +15,7 @@ type Color =
 type AnimalNoColor =
 | Bunny
 | Cat
-| Frog
+| Dog
 | Bear
 
 type Animal = { color: Color; animal: AnimalNoColor }
