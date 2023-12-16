@@ -1,4 +1,4 @@
-open Parser
+﻿open Parser
 open Evaluator
 open System.IO
 
@@ -22,19 +22,19 @@ let rec repl() : unit =
             let withTop = compositeImages withShoes topOne
             let accessoryOne = load (evalAccessory ast.accessory)
             (compositeImages withTop accessoryOne) |> save "Character.PNG"
-        | None -> printf "Make sure your input is of the form <emotion> <animal> wearing <outfit> <shoes> and <accessory>\n"
+        | None -> printf "Make sure your input is of the form <emotion> <animal> <outfit> <shoes> <accessory>\n"
     repl()
 
 [<EntryPoint>]
 let main args =
     printf "-----------------------------------------------------------------------------------------------------------------\n" 
     printf "-----------------------------------------------------------------------------------------------------------------\n" 
-    printf " \n Hello! Welcome to Jess and Will's character generator! :D \n
-    -------------------------------------------------------------------------------------------\n
-    This character generator will accept prompts that look like this: \n
+    printf " \n Hello! Welcome to Jess Hu and Will Olsen's Build-A-Char! :D \n
+    -----------------------------------------------------------------------------------------------\n
+    Build-A-Char will accept prompts that look like this: \n
     <emotion> <animal> <top> <bottom> <shoes> <accessory> \n
-    and it will return a PNG of a custom character fitting that description!\n
-    -------------------------------------------------------------------------------------------\n
+    and it will return a PNG called Character.PNG of a custom character fitting that description!\n
+    -----------------------------------------------------------------------------------------------\n
     Here are the available options for each category:\n
     <emotion>: happy, neutral, sad, mad, or tired\n
     <animal>: <color> bunny, cat, dog, or bear\n
@@ -43,15 +43,15 @@ let main args =
     <shoes>: <color> sneakers, cowboy boots, combat boots, heels, slippers, or blank \n
     <accessory>: <color> flower, star, glasses, sunglasses, scarf, gloves, or blank\n
     <color>: red, orange, yellow, green, blue, purple, pink, white, black, or brown\n
-    -------------------------------------------------------------------------------------------\n
+    -----------------------------------------------------------------------------------------------\n
     Here are some example prompts:\n
-    happy white bunny green tshirt blue pants yellow sneakers pink flower\n 
+    happy orange cat blue tshirt green pants black slippers pink flower\n 
     
-    neutral orange cat purple dress green blank blue cowboy boots yellow star\n
+    sad brown bear pink dress purple cowboy boots blue scarf\n
 
-    tired green dog red sweater orange shorts pink slippers blue sunglasses\n \n"
+    neutral white bunny black suit black sneakers yellow star\n \n"
     printf "-----------------------------------------------------------------------------------------------------------------\n"
     printf "-----------------------------------------------------------------------------------------------------------------\n" 
-    printf "Please enter a prompt!\n"
+    printf "Please enter a prompt! Type 'quit' when you are done using Build-A-Char!\n"
     repl()
     0
