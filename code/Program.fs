@@ -38,8 +38,8 @@ let main args =
     Here are the available options for each category:\n
     <emotion>: happy, neutral, sad, mad, or tired\n
     <animal>: <color> bunny, cat, dog, or bear\n
-    <top>: <color> tshirt, sweater, hoodie, or blank\n
-    <bottom>: <color> pants, shorts, skirt, suit or blank\n
+    <top>: <color> tshirt, sweater, hoodie, suit, dress or blank\n
+    <bottom>: <color> pants, shorts, skirt, or blank\n
     <shoes>: <color> sneakers, cowboy boots, combat boots, heels, slippers, or blank \n
     <accessory>: <color> flower, star, glasses, sunglasses, scarf, gloves, or blank\n
     <color>: red, orange, yellow, green, blue, purple, pink, white, black, or brown\n
