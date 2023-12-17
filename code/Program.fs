@@ -31,6 +31,8 @@ let main args =
     printf "-----------------------------------------------------------------------------------------------------------------------\n" 
     printf " \n Hello! Welcome to Jess Hu and Will Olsen's Build-A-Char! :D \n
     -----------------------------------------------------------------------------------------------------------------------\n
+    Video Explanation: https://drive.google.com/file/d/1vASNTjQVFMkyLatQbp2yEF75SCaf3CXc/view?ts=657ea89a
+    -----------------------------------------------------------------------------------------------------------------------\n
     Build-A-Char will accept prompts that look like this: \n
     <emotion> <animal> <top> <bottom> <shoes> <accessory> \n
     and it will return a PNG called Character.PNG of a custom character fitting that description!\n
