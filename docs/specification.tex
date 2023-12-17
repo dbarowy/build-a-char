@@ -56,6 +56,10 @@
 
 Jess Hu, Will Olsen
 
+\vspace{\baselineskip}
+
+Video Explanation: https://drive.google.com/file/d/1vASNTjQVFMkyLatQbp2yEF75SCaf3CXc/view?ts=657ea89a
+
 \subsection{Introduction}
 
 What problem does your language solve? Why does this problem need its own programming language?
@@ -83,12 +87,11 @@ Provide three example programs in your language that will eventually work. Unlik
 \vspace{\baselineskip}
 
 1)\begin{verbatim}
-dotnet run happy orange cat wearing blue shirt and green pants, black slippers,
+dotnet run 
+
+happy orange cat blue tshirt and green pants black slippers pink flower
 \end{verbatim}
 
-\begin{verbatim}
-and pink flower
-\end{verbatim}
 
 \vspace{\baselineskip}
 
@@ -97,21 +100,26 @@ EXECUTION: use ImageSharp library to composite the following PNG files in order:
 
 OUTCOME: PNG file containing a drawing of a happy orange cat wearing blue shirt and green pants, black slippers, and pink flower.
 \vspace{\baselineskip}
+\vspace{\baselineskip}
 
 2)\begin{verbatim}
-dotnet run sad brown bear wearing pink dress, purple boots, and blue scarf
+dotnet run
+
+sad white dog pink dress white blank purple cowboy boots blue scarf
 \end{verbatim}
 
 \vspace{\baselineskip}
 
-EXECUTION: use ImageSharp library to composite the following PNG files in order: Brown\textunderscore Bear.PNG, Pink\textunderscore Dress.PNG, Purple\textunderscore Boots.PNG, Blue\textunderscore Scarf.PNG, Sad.PNG
+EXECUTION: use ImageSharp library to composite the following PNG files in order: Brown\textunderscore Bear.PNG, Pink\textunderscore Dress.PNG, Purple\textunderscore Cowboy\textunderscore Boots.PNG, Blue\textunderscore Scarf.PNG, Sad.PNG
 \vspace{\baselineskip}
 
 OUTCOME: PNG file containing a drawing of a sad brown bear wearing pink dress, purple boots, and blue scarf
 \vspace{\baselineskip}
 
 3)\begin{verbatim}
-dotnet run neutral white bunny wearing black suit, black sneakers, and yellow star
+dotnet run
+
+neutral white bunny black suit black blank black sneakers yellow star
 \end{verbatim}
 
 \vspace{\baselineskip}
@@ -129,20 +137,13 @@ What are the core concepts a user needs to understand in order to write programs
 In order to use our programming language, the user must be familiar with the English language, or at least all of the words included in our BNF grammar, such as all of the emotions, animals, clothing, and colors. This is because in order to build any character, the user must be able to decide what features they want their character to have. 
 \vspace{\baselineskip}
 
-All of the primitives in our language are words taken from the English language and maintain the same meanings they have in English. These primatives include all of the words that follow <color> in our BNF grammar, such as bunny, suit, dress, heels, flower, and gloves, to name a few. Colors are also primatives in our language. As for combining forms, the ones in our language include animal, outfit, top, bottom, shoes, and accessory, as they each combine the primitive color with another primitive. Each combining form is a phrase, while each primitive is a single item.
+All of the primitives in our language are words taken from the English language and maintain the same meanings they have in English. These primatives include all of the words that follow <color> in our BNF grammar, such as bunny, suit, dress, heels, flower, and gloves, to name a few. Colors are also primatives in our language. As for combining forms, the ones in our language include evaluations for animal, top, bottom, shoes, and accessory, as they each combine the primitive color with another primitive to make a PNG file name. Each combining form makes a phrase, while each primitive is a single item. Then these filenames are loaded as Images in ImageSharp, composited using DrawImage, and saved. 
 
 \pagebreak
 
 \subsection{Syntax}
 
-Provide a formal syntax your language, written in Backus-Naur form. This documentation should
-provide all of the rules necessary for a user to generate a valid program. You may omit whitespace
-from your BNF specification if you find it cumbersome to include.
-Minimally, your BNF should include everything you have currently implemented in your small
-language. However, you are encouraged to add BNF syntax for features that you have not yet
-implemented, as a way of “thinking them through.” The final version of this section should match
-your actual implementation, since I will be using it to understand your language and to write
-programs of my own.
+Provide a formal syntax your language, written in Backus-Naur form. 
 
 \vspace{\baselineskip}
 
@@ -151,7 +152,7 @@ For input, the user's input would be of the form:
 
 \begin{center}
     \begin{verbatim}
-        <emotion> <animal> wearing <outfit>, <shoes>, and <accessory>
+        <emotion> <animal> <top> <bottom> <shoes> <accessory>
     \end{verbatim}   
 \end{center}
 where each element can have a specific color, as defined by the BNF grammar.
@@ -159,7 +160,7 @@ where each element can have a specific color, as defined by the BNF grammar.
 
 \begin{center}
     \begin{verbatim}
-        <expr> ::= <emotion> <animal> wearing <outfit>, <shoes>, and <accessory>
+        <expr> ::= <emotion> <animal> <top> <bottom> <shoes> <accessory>
         
         <emotion> ::= happy | neutral | sad | mad | tired
         
@@ -167,24 +168,25 @@ where each element can have a specific color, as defined by the BNF grammar.
                   | <color> cat 
                   | <color> dog 
                   | <color> bear
-        
-        <outfit> ::= <top> and <bottom>
-                  | <color> suit
-                  | <color> dress
 
         <top> ::= <color> shirt
                | <color> sweater 
                | <color> hoodie
+               | <color> suit
+               | <color> dress
+               | <color> blank
 
         <bottom> ::= <color> pants
                   | <color> shorts
                   | <color> skirt
+                  | <color> blank
 
         <shoes> ::= <color> sneakers
                  | <color> cowboy boots
                  | <color> combat boots
                  | <color> heels
                  | <color> slippers
+                 | <color> blank
                  
         <accessory> ::= <color> flower
                      | <color> star
@@ -192,6 +194,7 @@ where each element can have a specific color, as defined by the BNF grammar.
                      | <color> sunglasses
                      | <color> scarf
                      | <color> gloves
+                     | <color> blank
 
         <color> ::= red | orange | yellow | green | blue | purple | pink |
                     black | white | brown
@@ -214,7 +217,7 @@ values combined? For example, your system might combine primitive “numbers” 
 operation like “plus.” Or perhaps a user can arrange primitive “notes” in a “sequence.”
 \vspace{\baselineskip}
 
-The primitive strings in our language are combined by arranging them in the sequence specified by the definition of "expr" in our BNF grammar. The emotion and animal is specified first, followed by the word "wearing" and then the list of outfit, shoe, and accessory is separated using commas. 
+The primitive strings in our language are combined by arranging them in the sequence specified by the definition of "expr" in our BNF grammar. The emotion and animal is specified first, followed then by top, bottom, shoe, and accessory. Then these strings are concatenated to make strings representing PNG file names. Then they are loaded as images in ImageSharp and composited using the DrawImage method from ImageSharp. A new image is then saved, called "Character.PNG"
 \vspace{\baselineskip}
 
 
@@ -223,7 +226,7 @@ your AST? If it helps you to think about this using ML algebraic data types, ple
 Otherwise, a rough sketch like a class hierarchy drawings or even Java class code is OK.
 \vspace{\baselineskip}
 
-In our AST, the types include $\langle$expr$\rangle$, $\langle$emotion$\rangle$, $\langle$animal$\rangle$, $\langle$outfit$\rangle$, $\langle$top$\rangle$, $\langle$bottom$\rangle$, $\langle$shoes$\rangle$, $\langle$accessory$\rangle$, and $\langle$color$\rangle$. As indicated in our BNF grammar, an expr is of the form $\langle$emotion$\rangle$ $\langle$animal$\rangle$ wearing $\langle$outfit$\rangle$, and $\langle$shoes$\rangle$, $\langle$accessory$\rangle$. An $\langle$emotion$\rangle$ is either happy, neutral, sad, mad, or tired. An $\langle$animal$\rangle$ consists of a $\langle$color$\rangle$ followed by either bunny, cat, frog, or bear. An $\langle$shoes$\rangle$ consists of a $\langle$top$\rangle$ and $\langle$bottom$\rangle$ or either $\langle$color$\rangle$ suit or $\langle$color$\rangle$ dress. Then, $\langle$shoes$\rangle$ is a $\langle$color$\rangle$ followed by sneakers, cowboy boots, combat boots, heels, or slippers. An $\langle$accessory$\rangle$ is a $\langle$color$\rangle$ followed by either flower, star, glasses, sunglasses, scarf, or gloves. Finally a $\langle$color$\rangle$ is red, orange, yellow, green, blue, purple, pink, black, white, or grey.
+In our AST, the types include $\langle$expr$\rangle$, $\langle$emotion$\rangle$, $\langle$animal$\rangle$, $\langle$top$\rangle$, $\langle$bottom$\rangle$, $\langle$shoes$\rangle$, $\langle$accessory$\rangle$, and $\langle$color$\rangle$. As indicated in our BNF grammar, an expr is of the form $\langle$emotion$\rangle$ $\langle$animal$\rangle$ $\langle$top$\rangle$ $\langle$bottom$\rangle$ $\langle$shoes$\rangle$ $\langle$accessory$\rangle$. An $\langle$emotion$\rangle$ is either happy, neutral, sad, mad, or tired. An $\langle$animal$\rangle$ consists of a $\langle$color$\rangle$ followed by either bunny, cat, frog, or bear. A $\langle$top$\rangle$ consists of a $\langle$color$\rangle$ followed by suit, dress, hoodie, sweater, tshirt, or blank. Then, $\langle$bottom$\rangle$ is a $\langle$color$\rangle$ followed by pants, shorts, skirt, or blank. Then, $\langle$shoes$\rangle$ is a $\langle$color$\rangle$ followed by sneakers, cowboy boots, combat boots, heels, slippers, or blank. An $\langle$accessory$\rangle$ is a $\langle$color$\rangle$ followed by either flower, star, glasses, sunglasses, scarf, gloves, or blank. Finally a $\langle$color$\rangle$ is red, orange, yellow, green, blue, purple, pink, black, white, or brown.
 \vspace{\baselineskip}
 
 
@@ -234,23 +237,21 @@ example programs you gave earlier, provide sample abstract syntax trees.
 Note: There should be commas included in the expression, but the tree does not allow us to include the commas for some reason. Also, the rest of the tree should be branching out of the non-terminals in the expression, but we could not figure out how to build the tree that way even with TA help.
 
 1)\begin{verbatim}
-happy orange cat wearing blue shirt and green pants, black slippers, and pink flower
+happy orange cat blue tshirt green pants black slippers pink flower
 \end{verbatim}
 
 \begin{center}
     \begin{forest}
       [ $\langle$expr$\rangle$
-      [$\langle$emotion$\rangle$ $\langle$animal$\rangle$ wearing $\langle$outfit$\rangle$ $\langle$shoes$\rangle$ $\langle$accessory$\rangle$
+      [$\langle$emotion$\rangle$ $\langle$animal$\rangle$ $\langle$top$\rangle$ $\langle$bottom$\rangle$ $\langle$shoes$\rangle$ $\langle$accessory$\rangle$
       [happy]
       [$\langle$color$\rangle$ cat
       [orange]
       ]
-      [$\langle$top$\rangle$ and $\langle$bottom$\rangle$
-      [$\langle$color$\rangle$ shirt
+      [$\langle$color$\rangle$ tshirt
       [blue]
       ] [$\langle$color$\rangle$ pants
       [green]
-      ]
       ]
       [$\langle$color$\rangle$ slippers
       [black]
@@ -265,21 +266,23 @@ happy orange cat wearing blue shirt and green pants, black slippers, and pink fl
 \vspace{\baselineskip}
 
 2)\begin{verbatim}
-sad white dog wearing pink dress, purple boots, and blue scarf
+sad white dog pink dress white blank purple cowboy boots blue scarf
 
 \end{verbatim}
 \begin{center}
     \begin{forest}
       [ $\langle$expr$\rangle$
-      [$\langle$emotion$\rangle$ $\langle$animal$\rangle$ wearing $\langle$outfit$\rangle$ $\langle$shoes$\rangle$ $\langle$accessory$\rangle$
+      [$\langle$emotion$\rangle$ $\langle$animal$\rangle$ $\langle$top$\rangle$ $\langle$bottom$\rangle$ $\langle$shoes$\rangle$ $\langle$accessory$\rangle$
       [sad]
       [$\langle$color$\rangle$ dog
       [white]
       ]
       [$\langle$color$\rangle$ dress
       [pink]
+      ] [$\langle$color$\rangle$ blank
+      [white]
       ]
-      [$\langle$color$\rangle$ boots
+      [$\langle$color$\rangle$ cowboy boots
       [purple]
       ]
       [$\langle$color$\rangle$ scarf
@@ -292,17 +295,19 @@ sad white dog wearing pink dress, purple boots, and blue scarf
 \vspace{\baselineskip}
 
 3)\begin{verbatim}
-neutral white bunny wearing black suit, black sneakers, and yellow star
+neutral white bunny black suit black blank black sneakers yellow star
 \end{verbatim}
 \begin{center}
     \begin{forest}
       [ $\langle$expr$\rangle$
-      [$\langle$emotion$\rangle$ $\langle$animal$\rangle$ wearing $\langle$outfit$\rangle$ $\langle$shoes$\rangle$ $\langle$accessory$\rangle$
+      [$\langle$emotion$\rangle$ $\langle$animal$\rangle$ $\langle$top$\rangle$ $\langle$bottom$\rangle$ $\langle$shoes$\rangle$ $\langle$accessory$\rangle$
       [neutral]
       [$\langle$color$\rangle$ bunny
       [white]
       ]
       [$\langle$color$\rangle$ suit
+      [black]
+      ] [$\langle$color$\rangle$ blank
       [black]
       ]
       [$\langle$color$\rangle$ sneakers
@@ -314,30 +319,15 @@ neutral white bunny wearing black suit, black sneakers, and yellow star
       ]]
     \end{forest}
   \end{center}
+
 \vspace{\baselineskip}
 
-v. How is your program evaluated? In particular,
-\vspace{\baselineskip}
-
-A. Do programs in your language read any input?
-\vspace{\baselineskip}
-
-
-B. What is the effect (output) of evaluating a program?
-\vspace{\baselineskip}
-
-C. Evaluation is usually conceived of as a post-order traversal of an AST. Describe how such
-a traversal yields the effect you just described and provide illustrations for clarity (draw
-these trees using the forest package). Demonstrate evaluation for one of your example
-programs.
-\vspace{\baselineskip}
-
-Our language reads any input that is of the form $\langle$emotion$\rangle$ $\langle$animal$\rangle$ wearing $\langle$outfit$\rangle$, and $\langle$shoes$\rangle$, $\langle$accessory$\rangle$. If the given input does not follow that format, the program will continue asking for input until the user either enters a correctly formatted input or quits. The output of evaluating a program will be a PNG representing the generated character. This PNG will be built by stacking individual PNGs for each element needed to build the character. For example, the final PNG for the first AST will be composed of a happy face, an orange cat, a blue shirt, green pants, black slippers, and a pink flower. When these elements are stacked in this exact order, the final image will be a completed character. Since the tree is traversed in post-order, the expr will be evaluated only after each of its non-terminals has been evaluated. For types that are composed of a non-terminals, such as $\langle$animal$\rangle$, which is composed of a $\langle$color$\rangle$ and a word such as bear. In example 1, the colors orange, blue, green, black, and pink must be evaluated so that orange cat, blue shirt, green pants, black slippers, and pink flower can be evaluated. In this first example, an $\langle$outfit$\rangle$ consists of a $\langle$top$\rangle$ and $\langle$bottom$\rangle$, so blue shirt and green pants must be evaluated before $\langle$outfit$\rangle$ can be evaluated. Only after all of these evaluations can the expr be evaluated because there are no non-terminals left to evaluate.
+Our language reads any input that is of the form $\langle$emotion$\rangle$ $\langle$animal$\rangle$ $\langle$top$\rangle$ $\langle$bottom$\rangle$ $\langle$shoes$\rangle$ $\langle$accessory$\rangle$. If the given input does not follow that format, the program print usage info and will continue asking for input until the user either enters a correctly formatted input or quits. The output of evaluating a program will be a PNG representing the generated character. This PNG will be built by stacking individual PNGs for each element needed to build the character. For example, the final PNG for the first AST will be composed of a happy face, an orange cat, a blue shirt, green pants, black slippers, and a pink flower. When these elements are stacked in this exact order, the final image will be a completed character. Since the tree is traversed in post-order, the expr will be evaluated only after each of its non-terminals has been evaluated. For types that are composed of a non-terminals, such as $\langle$animal$\rangle$, which is composed of a $\langle$color$\rangle$ and a word such as bear. In example 1, the colors orange, blue, green, black, and pink must be evaluated so that orange cat, blue shirt, green pants, black slippers, and pink flower can be evaluated. Only after all of these evaluations can the expr be evaluated because there are no non-terminals left to evaluate.
 \vspace{\baselineskip}
 
 \subsection{Remaining Work}
 
-In the following weeks, we still need to finish our Parser.fs and Evaluator.fs so that our language properly parses and evaluates the remaining types and generates the proper PNG filename for each type. We also need to read the documentation for ImageSharp's compositing functions and implement them in our main method so that our program returns a PNG to the user.
+In the future, we would love to implement ways for users to input their own PNGs to the library. We would also like to have our programming language be able to generate characters in different poses or with different backgrounds behind them.
 
 
 % DO NOT DELETE ANYTHING BELOW THIS LINE
